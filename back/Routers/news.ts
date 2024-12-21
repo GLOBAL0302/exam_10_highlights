@@ -36,6 +36,8 @@ newsRouter.post('/', imagesUpload.single('image'), async (req, res, next) => {
     description: req.body.description,
     image: req.file ? 'image' + req.file.filename : null,
   };
+
+  console.log(newNews);
   try {
     const connection = await mysqlDb.getConnection();
     const [result] = await connection.query('INSERT INTO news(title, description, image)VALUES (?,?,?)', [
