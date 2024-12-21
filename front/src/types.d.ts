@@ -3,7 +3,7 @@ export interface INews {
   title: string;
   description: string;
   image: string | null;
-  create_at: string;
+  created_at: string;
 }
 
 export interface INewsMutation {

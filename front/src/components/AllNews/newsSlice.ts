@@ -1,17 +1,21 @@
 import { INews } from '../../types';
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchAllNewsThunks, postOneNews } from './newsThunks.ts';
+import { deleteOneNews, fetchAllNewsThunks, postOneNews } from './newsThunks.ts';
 
 interface INewsSlice {
   news: INews[];
+  oneNews: INews | null;
   isFetching: boolean;
   isPosting: boolean;
+  isDeleting: boolean;
 }
 
 const initialState: INewsSlice = {
   news: [],
+  oneNews: null,
   isFetching: false,
   isPosting: false,
+  isDeleting: false,
 };
 
 const newsSlice = createSlice({
@@ -41,13 +45,25 @@ const newsSlice = createSlice({
       .addCase(postOneNews.rejected, (state) => {
         state.isPosting = false;
       });
+
+    builder
+      .addCase(deleteOneNews.pending, (state) => {
+        state.isDeleting = true;
+      })
+      .addCase(deleteOneNews.fulfilled, (state) => {
+        state.isDeleting = false;
+      })
+      .addCase(deleteOneNews.rejected, (state) => {
+        state.isDeleting = false;
+      });
   },
   selectors: {
     selectAllNews: (state) => state.news,
     selectIsFetching: (state) => state.isFetching,
     selectIsPosting: (state) => state.isPosting,
+    selectIsDeleting: (state) => state.isDeleting,
   },
 });
 
 export const newsReducer = newsSlice.reducer;
-export const { selectAllNews, selectIsPosting, selectIsFetching } = newsSlice.selectors;
+export const { selectAllNews, selectIsPosting, selectIsFetching, selectIsDeleting } = newsSlice.selectors;
