@@ -18,3 +18,9 @@ export interface IComments {
   author: string;
   description: string;
 }
+
+export interface ICommentsMutation {
+  news_id: string;
+  author: string;
+  description: string;
+}

@@ -19,15 +19,10 @@ export const postOneNews = createAsyncThunk<void, INewsMutation>('news/postOneNe
   await axiosApi.post('/news', formData);
 });
 
-export const fetchOneNewsThunk = createAsyncThunk<INews[], string>(
-  "news/fetchOneNewsThunk",
-    async (id)=>{
-    const {data} =await axiosApi.get(`news/${id}`);
-      console.log(data);
-
-      return data;
-  }
-)
+export const fetchOneNewsThunk = createAsyncThunk<INews[], string>('news/fetchOneNewsThunk', async (id) => {
+  const { data } = await axiosApi.get(`news/${id}`);
+  return data;
+});
 
 export const deleteOneNews = createAsyncThunk<void, INews>('news/deleteOneNews', async (oneNews) => {
   await axiosApi.delete(`/news/${oneNews.id}`);

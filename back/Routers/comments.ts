@@ -41,7 +41,6 @@ commentsRouter.post('/', async (req, res, next) => {
     author: req.body.author ? req.body.author : 'Anonymous',
     description: req.body.description,
   };
-  console.log(newComments);
 
   try {
     const connection = await mySqlDb.getConnection();
