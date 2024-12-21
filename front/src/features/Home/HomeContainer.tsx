@@ -4,8 +4,8 @@ import AllNews from '../../components/AllNews/allNews.tsx';
 
 const HomeContainer = () => {
   return (
-    <div>
-      <Grid2 container justifyContent="space-between" alignItems="center">
+    <>
+      <Grid2 marginBottom={3} container justifyContent="space-between" alignItems="center">
         <Grid2>
           <Typography variant="h6" component="h6">
             <strong>Posts</strong>
@@ -22,7 +22,7 @@ const HomeContainer = () => {
       <Grid2>
         <AllNews />
       </Grid2>
-    </div>
+    </>
   );
 };
 

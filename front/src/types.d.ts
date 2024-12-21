@@ -24,3 +24,4 @@ export interface ICommentsMutation {
   author: string;
   description: string;
 }
+export type ICommentWithOutId = Omit<ICommentsMutation, 'news_id'>;

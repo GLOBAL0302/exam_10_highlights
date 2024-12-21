@@ -13,7 +13,7 @@ const Comment: React.FC<Props> = ({ comment }) => {
 
   const onClickDelete = async () => {
     await dispatch(deleteOneComment(comment));
-    await dispatch(fetchAllCommentsThunks());
+    await dispatch(fetchAllCommentsThunks(comment.news_id));
   };
 
   return (

@@ -21,8 +21,7 @@ commentsRouter.get('/', async (req, res, next) => {
       return;
     } else {
       const [result] = await connection.query('SELECT * FROM comments');
-      console.log('out');
-      console.log(result);
+
       res.status(200).send(result);
       return;
     }

@@ -5,15 +5,17 @@ import { selectAllComments, selectIsFetchingCom } from './commentsSlice.ts';
 import { CircularProgress, Grid2 } from '@mui/material';
 import Comment from './Comment.tsx';
 
-const Comments = () => {
+interface Props {
+  id: string;
+}
+
+const Comments: React.FC<Props> = ({ id }) => {
   const dispatch = useAppDispatch();
   const selectComments = useAppSelector(selectAllComments);
   const selectIsFetchCom = useAppSelector(selectIsFetchingCom);
 
-  console.log(selectComments);
-
   const fetchAllComments = async () => {
-    await dispatch(fetchAllCommentsThunks());
+    await dispatch(fetchAllCommentsThunks(id));
   };
 
   useEffect(() => {
@@ -27,6 +29,7 @@ const Comments = () => {
       ) : (
         <Grid2
           style={{
+            marginBottom: '10px',
             border: '1px dashed black',
             padding: '5px',
             height: '200px',

@@ -8,6 +8,9 @@ import noPic from '../../assets/noPic.jpeg';
 import { apiUrl } from '../../Constants.ts';
 import dayjs from 'dayjs';
 import Comments from '../../components/allComments/Comments.tsx';
+import AddComments from '../../components/allComments/AddComments.tsx';
+import { ICommentWithOutId } from '../../types';
+import { fetchAllCommentsThunks, postOneComment } from '../../components/allComments/commentsThunks.ts';
 
 const OneNewsContainer = () => {
   const dispatch = useAppDispatch();
@@ -26,6 +29,17 @@ const OneNewsContainer = () => {
     newsPic = apiUrl + '/' + oneNews.image;
   }
 
+  const onClickPost = async (item: ICommentWithOutId) => {
+    if (id) {
+      const newComment = {
+        news_id: id,
+        ...item,
+      };
+      await dispatch(postOneComment(newComment));
+      await dispatch(fetchAllCommentsThunks(id));
+    }
+  };
+
   useEffect(() => {
     void fetchOneNews();
   }, [id]);
@@ -39,7 +53,7 @@ const OneNewsContainer = () => {
             <>
               <Grid2 flexDirection="column">
                 <Grid2>
-                  <Typography textAlign="center" variant="h2" component="h2">
+                  <Typography textAlign="center" variant="h4" component="h4">
                     {oneNews.title}
                   </Typography>
                 </Grid2>
@@ -47,7 +61,7 @@ const OneNewsContainer = () => {
                   <CardMedia
                     component="img"
                     image={newsPic}
-                    style={{ width: '300px', height: '300px' }}
+                    style={{ width: '200px', height: '200px' }}
                     title={oneNews.title}
                   />
                 </Grid2>
@@ -58,12 +72,13 @@ const OneNewsContainer = () => {
                 </Grid2>
                 <hr />
                 <Grid2>
-                  <Typography variant="h5" gutterBottom>
+                  <Typography variant="subtitle1" component="p" gutterBottom>
                     {oneNews.description}
                   </Typography>
                 </Grid2>
                 <hr />
-                <Comments />
+                {id && <Comments id={id}/>}
+                <AddComments onClickPost={onClickPost} />
               </Grid2>
             </>
           )}

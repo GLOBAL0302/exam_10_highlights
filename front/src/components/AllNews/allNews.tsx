@@ -9,7 +9,6 @@ const AllNews = () => {
   const dispatch = useAppDispatch();
   const news = useAppSelector(selectAllNews);
   const isFetching = useAppSelector(selectIsFetching);
-  console.log(news);
 
   const fetchAllNews = useCallback(async () => {
     await dispatch(fetchAllNewsThunks());
