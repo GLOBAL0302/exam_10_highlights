@@ -45,7 +45,7 @@ const OneNews: React.FC<Props> = ({ oneNews }) => {
       </Grid2>
       <Grid2 width="30%">
         <Typography variant="h5" component="p">
-          {oneNews.description}
+          {oneNews.title}
         </Typography>
         <Typography variant="body2" component="p">
           {dayjs(oneNews.created_at).format('YYYY-MM-DD HH:mm:ss')}

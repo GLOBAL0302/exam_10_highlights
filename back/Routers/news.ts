@@ -20,7 +20,8 @@ newsRouter.get('/:id', async (req, res, next) => {
   const id = req.params.id;
   try {
     const connection = await mysqlDb.getConnection();
-    const [result] = await connection.query('SELECT * FROM comments WHERE id=?', [id]);
+    const [result] = await connection.query('SELECT * FROM news WHERE id=?', [id]);
+
     res.status(200).send(result);
   } catch (err) {
     next(err);
